@@ -10,9 +10,9 @@ app.use(bodyParser.json());
 app.use(cors());
 // Sample data (replace with your own data store)
 const items = [
-  { id: 1, name: 'Item 1' },
-  { id: 2, name: 'Item 2' },
-  { id: 3, name: 'Item 3' },
+  { id: 1, name: 'Item 1', description: 'This is Task 1' },
+  { id: 2, name: 'Item 2', description: 'This is Task 2'  },
+  { id: 3, name: 'Item 3', description: 'This is Task 3'  },
 ];
 
 // GET all items
@@ -32,7 +32,7 @@ app.get('/items/:id', (req, res) => {
 
 // POST a new item
 app.post('/items', (req, res) => {
-  const newItem = { id: items.length + 1, name: req.body.name };
+  const newItem = { id: items.length + 1, name: req.body.name, description: req.body.description };
   items.push(newItem);
   res.status(201).json(newItem);
 });
@@ -44,7 +44,12 @@ app.put('/items/:id', (req, res) => {
   if (itemIndex === -1) {
     return res.status(404).json({ message: 'Item not found' });
   }
-  items[itemIndex].name = req.body.name;
+  if (req.body.name) {
+    items[itemIndex].name = req.body.name;
+  }
+  if (req.body.description) {
+    items[itemIndex].description = req.body.description;
+  }
   res.json(items[itemIndex]);
 });
 
