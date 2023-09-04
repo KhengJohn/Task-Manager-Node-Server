@@ -1,0 +1,6 @@
+[build]
+  command = "npm run build"  # Specify your build command
+  publish = "frontend/dist"  # Specify the directory where your frontend code is built
+
+[functions]
+  directory = "server"  # Specify the directory containing your serverless functions (if applicable)
